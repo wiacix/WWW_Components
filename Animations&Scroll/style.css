@@ -1,0 +1,89 @@
+html{
+    width: 100%;
+    height: 100%;
+}
+
+body{
+    width: 100%;
+    height: 100%;
+    background-image: -webkit-radial-gradient(top left, rgb(242, 158, 252), rgba(64, 0, 68, 0.637));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+div{
+    height: auto;
+    font-size: 50px;
+    font-weight: 700;
+    overflow: hidden;
+}
+
+ul li{
+    display: inline-block;
+    position: relative;
+}
+
+ul li:hover{
+    cursor: pointer;
+}
+
+li::after{
+    content: '';
+    background-color: red;
+    width: 0%;
+    height: 5px;
+    display: block;
+    transition: 1s;
+}
+
+li::before{
+    content: '';
+    background-color: red;
+    width: 0%;
+    height: 5px;
+    display: block;
+    position: absolute;
+    right: 0;
+    transition: 1s;
+}
+
+li:hover::after{
+    content: '';
+    background-color: red;
+    width: 100%;
+    height: 5px;
+    display: block;
+}
+
+li:hover::before{
+    content: '';
+    background-color: red;
+    width: 100%;
+    height: 5px;
+    position: absolute;
+    right: 0;
+    display: block;
+}
+
+/* spinning circle */
+
+#spin{
+    border: 10px solid rgb(75, 75, 75);
+    border-top: 10px solid grey;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    animation: rotate_load 2s infinite linear;
+}
+
+@keyframes rotate_load{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}

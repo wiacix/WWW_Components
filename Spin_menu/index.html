@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spin Justyna</title>
+    <style>
+        body{
+            width: 100%;
+            height: 900px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #main{
+            height: 300px;
+            width: 300px;
+            background-color: rgb(140, 168, 82);
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 1s;
+        }
+        .small_circle{
+            border: 2px solid black;
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: 1s;
+        }
+        .small_circle > p{
+            display: none;
+            transition: 1s;
+        }
+        .small_circle > ul{
+            display: none;
+        }
+        .small_circle img{
+            transition: 1s;
+        }
+        .small_circle:hover{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <img src="arrow.png" alt="arrow" width="200px" height="200px" id="arrow" style="transition: 0.5s;">
+        <div class="small_circle" id="c1"><img src="hedgehog.png" alt="hedgehog" id="img1" class="img"><p id="p1">Hedgehog #1</p><ul id="lis1"><li>Ele 1</li><li>Ele 2</li><li>Ele 3</li></ul></div>
+        <div class="small_circle" id="c2"><img src="hedgehog.png" alt="hedgehog" id="img2" class="img"><p id="p2">Hedgehog #2</p><ul id="lis2"><li>Ele 1</li><li>Ele 2</li><li>Ele 3</li></ul></div>
+        <div class="small_circle" id="c3"><img src="hedgehog.png" alt="hedgehog" id="img3" class="img"><p id="p3">Hedgehog #3</p><ul id="lis3"><li>Ele 1</li><li>Ele 2</li><li>Ele 3</li></ul></div>
+        <div class="small_circle" id="c4"><img src="hedgehog.png" alt="hedgehog" id="img4" class="img"><p id="p4">Hedgehog #4</p><ul id="lis4"><li>Ele 1</li><li>Ele 2</li><li>Ele 3</li></ul></div>
+        <div class="small_circle" id="c5"><img src="hedgehog.png" alt="hedgehog" id="img5" class="img"><p id="p5">Hedgehog #5</p><ul id="lis5"><li>Ele 1</li><li>Ele 2</li><li>Ele 3</li></ul></div>
+        <div class="small_circle" id="c6"><img src="hedgehog.png" alt="hedgehog" id="img6" class="img"><p id="p6">Hedgehog #6</p><ul id="lis6"><li>Ele 1</li><li>Ele 2</li><li>Ele 3</li></ul></div>
+    </div>
+    <script>
+        for(var i=0; i<6; i++){
+            document.getElementById('c'+(i+1)).style.transform = 'rotate('+i*60+'deg) translate(200px) rotate(-'+i*60+'deg)';
+        }
+
+        document.addEventListener("DOMContentLoaded", function(event) {
+            var el = document.getElementsByClassName("small_circle");
+            var pom_id=0;
+            for(var i=0; i<el.length; i++){
+                el[i].onmouseover = function(){
+                    var id_el = (this.id);
+                    //document.getElementById('img'+id_el.substr(-1)).style.transform = 'rotate(360deg)';
+                    //document.getElementById(id_el).style.backgroundColor = 'lightgrey';
+                }
+
+                el[i].onmouseout = function(){
+                    var id_el = (this.id);
+                    //document.getElementById('img'+id_el.substr(-1)).style.transform = 'rotate(0deg)';
+                    //document.getElementById(id_el).style.backgroundColor = 'white';
+                }
+
+                function onclick_fun1(id_el, pom_id){
+                    document.getElementById('main').style.transform = 'rotate(-'+(id_el.substr(-1)-1)*60+'deg)';
+                    document.getElementById('arrow').style.transform = 'rotate('+(id_el.substr(-1)-1)*60+'deg)';
+                    for(var i=0; i<6; i++){
+                        document.getElementById('img'+(i+1)).style.transform = 'rotate('+(id_el.substr(-1)-1)*60+'deg)';
+                    }
+                    if(pom_id!=0){
+                        var el = document.getElementById(pom_id);
+                        el.style.width = '75px';
+                        el.style.height = '75px';
+                        el.style.borderRadius = '50%';
+                        el.style.marginLeft = '0px';
+                        document.getElementById('img'+pom_id.substr(-1)).style.display = 'block';
+                        document.getElementById('p'+pom_id.substr(-1)).style.display = 'none';
+                        document.getElementById('lis'+pom_id.substr(-1)).style.display = 'none';
+                        el.style.transform = 'rotate('+(pom_id.substr(-1)-1)*60+'deg) translate(200px) rotate(-'+(pom_id.substr(-1)-1)*60+'deg)';
+                    }
+                    var el = document.getElementById(id_el);
+                    var tra1 = [0, 80, 135, 180, 225, 280];
+                    var tra2 = [200, 250, 350, 400, 350, 250];
+                    var tra3 = [-0, -20, -15, -0, 15, 20];
+                    document.getElementById(id_el).style.transform = 'rotate('+tra1[id_el.substr(-1)-1]+'deg) translate('+tra2[id_el.substr(-1)-1]+'px) rotate('+tra3[id_el.substr(-1)-1]+'deg)';
+                    el.style.width = '200px';
+                    el.style.height = '200px';
+                    el.style.borderRadius = '20px';
+                    el.style.marginLeft = '200px';
+                    document.getElementById('img'+id_el.substr(-1)).style.display = 'none';
+                    document.getElementById('p'+id_el.substr(-1)).style.display = 'block';
+                    document.getElementById('lis'+id_el.substr(-1)).style.display = 'block';
+                }
+
+                function onclick_fun2(id_el){
+                    document.getElementById('arrow').style.transform = 'rotate('+(id_el.substr(-1)-1)*60+'deg)';
+                }
+
+                el[i].onclick = function(){
+                    var id_el = (this.id);
+                    onclick_fun1(id_el, pom_id);
+                    pom_id = id_el;
+                    //onclick_fun2(id_el);
+                };
+            }
+        });
+    </script>
+</body>
+</html>

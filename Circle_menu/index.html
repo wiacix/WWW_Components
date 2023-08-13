@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cirlce Menu</title>
+    <style>
+        .circle {
+            position: relative;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background-color: lightgray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .element{
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            border: 5px solid grey;
+            transition: 1s;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .element:nth-child(1) {
+            transform: rotate(0deg) translate(220px) rotate(-0deg);
+        }
+
+        .element:nth-child(2) {
+            transform: rotate(60deg) translate(220px) rotate(-60deg);
+        }
+
+        .element:nth-child(3) {
+            transform: rotate(120deg) translate(220px) rotate(-120deg);
+        }
+
+        .element:nth-child(4) {
+            transform: rotate(180deg) translate(220px) rotate(-180deg);
+        }
+
+        .element:nth-child(5) {
+            transform: rotate(240deg) translate(220px) rotate(-240deg);
+        }
+
+        .element:nth-child(6) {
+            transform: rotate(300deg) translate(220px) rotate(-300deg);
+        }
+
+        .element:hover{
+            cursor: pointer;
+        }
+
+        input[type='button']{
+            display: none;
+        }
+
+    </style>
+    
+</head>
+<body>
+    <div class="circle">
+        <div class="element" id="e1"><p>O mnie</p><input type="button" value="Sprawdź" id="1_bt"></div>
+        <div class="element" id="e2"><p>Kontakt</p><input type="button" value="Sprawdź" id="2_bt"></div>
+        <div class="element" id="e3"><p>Projekty</p><input type="button" value="Sprawdź" id="3_bt"></div>
+        <div class="element" id="e4"><p>Działalność</p><input type="button" value="Sprawdź" id="4_bt"></div>
+        <div class="element" id="e5"><p>Doświadczenie</p><input type="button" value="Sprawdź" id="5_bt"></div>
+        <div class="element" id="e6"><p>Staże</p><input type="button" value="Sprawdź" id="6_bt"></div>
+      </div>
+    <script>
+        var color_list = ['#9CC0FF', '#AAAAFF', '#C090FF', '#9900FF', '#6709FF', '#0000FF'];
+
+        for(var i=1;i<=6;i++){
+            document.getElementById('e'+i).style.border = "5px solid "+color_list[i-1];
+        }
+
+        function paint(id_el, color_list){
+            document.getElementById(id_el).style.backgroundColor = color_list[id_el.substr(-1)-1];
+            document.getElementById(id_el).children[0].style.color = 'white';
+        }
+
+        function grey_scale(id_el){
+            document.getElementById(id_el).style.backgroundColor = 'white';
+            document.getElementById(id_el).children[0].style.color = 'black';
+            document.getElementById(id_el).style.width = '120px';
+            document.getElementById(id_el).style.height = '120px';
+        }
+
+        document.addEventListener("DOMContentLoaded", function(event) {
+            var el = document.getElementsByClassName("element");
+            for(var i=0; i<el.length; i++){
+                el[i].onmouseover = function(){
+                    var id_el = (this.id);
+                    paint(id_el, color_list);
+                }
+                el[i].onmouseout = function(){
+                    var id_el = (this.id);
+                    if(document.getElementById(id_el).style.width!='220px'){
+                        grey_scale(id_el);
+                    }
+                }
+                el[i].onclick = function(){
+                    for(var i=0; i<el.length; i++){
+                        document.getElementById('e'+(i+1)).style.transform = 'rotate('+60*i+'deg) translate(220px) rotate(-'+60*i+'deg)';
+                        grey_scale('e'+(i+1));
+                        document.getElementById((i+1)+'_bt').style.display = 'none';
+                    }
+                    var id_el = (this.id);
+                    paint(id_el, color_list);
+                    document.getElementById(id_el.substr(-1)+'_bt').style.display = 'block';
+                    document.getElementById(id_el).style.transform = 'rotate(0deg) translate(0px) rotate(-0deg)';
+                    document.getElementById(id_el).style.width = '220px';
+                    document.getElementById(id_el).style.height = '220px';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
